@@ -1,0 +1,102 @@
+package aplicaciones;
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+
+public class Principal extends JFrame {
+
+	private JPanel contentPane;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Principal frame = new Principal();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Principal() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		
+		JMenu mnOperacion = new JMenu("Operacion");
+		menuBar.add(mnOperacion);
+		
+		JMenuItem mntmAlquiler = new JMenuItem("Alquiler");
+		mntmAlquiler.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				procesarAlquiler();
+			}
+
+		});
+		mnOperacion.add(mntmAlquiler);
+		
+		JMenuItem mntmRecomendacion = new JMenuItem("Recomendacion");
+		mnOperacion.add(mntmRecomendacion);
+		
+		JMenuItem mntmEntrega = new JMenuItem("Entrega");
+		mnOperacion.add(mntmEntrega);
+		
+		JMenu mnSalir = new JMenu("Salir");
+		mnSalir.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				int  ok = JOptionPane.showConfirmDialog(mnSalir,"¿Estas seguro de salir?");
+				if (ok == 0)
+					System.exit(0);
+			}
+		});
+		
+		JMenu mnReportes = new JMenu("Reportes");
+		menuBar.add(mnReportes);
+		
+		JMenuItem mntmLibros = new JMenuItem("Libros");
+		mnReportes.add(mntmLibros);
+		
+		JMenuItem mntmRevistas = new JMenuItem("Revistas");
+		mnReportes.add(mntmRevistas);
+		
+		JMenuItem mntmDiscos = new JMenuItem("Discos");
+		mnReportes.add(mntmDiscos);
+		menuBar.add(mnSalir);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new BorderLayout(0, 0));
+		setContentPane(contentPane);
+		
+		JPanel panel = new JPanel();
+		contentPane.add(panel, BorderLayout.CENTER);
+	}
+	
+	private void procesarAlquiler() {
+		Alquiler alq = new Alquiler();
+		alq.setVisible(true);
+	}
+}

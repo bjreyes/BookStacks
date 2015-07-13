@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="ventasMarket.inventario"/>
+<fullyQualifiedTypeName name="javax.swing.UIManager"/>
+<fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
+<fullyQualifiedTypeName name="javax.naming.LimitExceededException"/>
+<fullyQualifiedTypeName name="login"/>
+<fullyQualifiedTypeName name="Principal"/>
+<fullyQualifiedTypeName name="aplicaciones.login"/>
+<fullyQualifiedTypeName name="java.lang.Thread"/>
+<fullyQualifiedTypeName name="java.lang.InterruptedException"/>
+<fullyQualifiedTypeName name="hilos.HiloBarra"/>
+<fullyQualifiedTypeName name="aplicaciones.Alquiler"/>
+</qualifiedTypeNameHistroy>

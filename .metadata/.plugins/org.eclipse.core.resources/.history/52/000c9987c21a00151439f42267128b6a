@@ -1,0 +1,34 @@
+package aplicaciones;
+
+import java.awt.EventQueue;
+
+import javax.swing.JInternalFrame;
+import javax.swing.JButton;
+import java.awt.BorderLayout;
+
+public class test extends JInternalFrame {
+
+	/**
+	 * Launch the application.
+	 */
+	/**
+	 * Create the frame.
+	 */
+	public test() {
+		setClosable(true);
+		setClosed(true);
+		setMaximum(true);
+		setIcon(true);
+		setMaximizable(true);
+		setIconifiable(true);
+		setResizable(true);
+		setSelected(true);
+		setTitle("test...");
+		setBounds(100, 100, 450, 300);
+		
+		JButton btnNewButton = new JButton("New button");
+		getContentPane().add(btnNewButton, BorderLayout.NORTH);
+
+	}
+
+}

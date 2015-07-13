@@ -1,0 +1,20 @@
+package aplicaciones;
+
+import java.awt.EventQueue;
+
+import javax.swing.JInternalFrame;
+
+public class test extends JInternalFrame {
+
+	/**
+	 * Launch the application.
+	 */
+	/**
+	 * Create the frame.
+	 */
+	public test() {
+		setBounds(100, 100, 450, 300);
+
+	}
+
+}
