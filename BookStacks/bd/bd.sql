@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `bookstacks` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `bookstacks`;
 -- MySQL dump 10.13  Distrib 5.6.23, for Win64 (x86_64)
 --
 -- Host: localhost    Database: bookstacks
@@ -27,9 +25,10 @@ DROP TABLE IF EXISTS `alquiler`;
 CREATE TABLE `alquiler` (
   `idalquiler` int(11) NOT NULL AUTO_INCREMENT,
   `codAlquiler` varchar(45) DEFAULT NULL,
-  `fechaEntrega` date DEFAULT NULL,
-  `fechaSalida` date DEFAULT NULL,
-  `montoPagar` varchar(255) DEFAULT NULL,
+  `fechaEntrega` varchar(40) DEFAULT NULL,
+  `fechaSalida` varchar(40) DEFAULT NULL,
+  `montoPagar` decimal(5,0) DEFAULT NULL,
+  `nomClienteAlquiler` varchar(100) DEFAULT NULL,
   `persona_idpersona` int(11) NOT NULL,
   `estadoAlquiler` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`idalquiler`,`persona_idpersona`),
@@ -339,4 +338,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-07-15 15:49:01
+-- Dump completed on 2015-07-15 15:51:26
