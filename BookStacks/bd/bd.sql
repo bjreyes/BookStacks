@@ -1,11 +1,32 @@
 CREATE DATABASE  IF NOT EXISTS `bookstacks` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `bookstacks`;
+-- MySQL dump 10.13  Distrib 5.6.23, for Win64 (x86_64)
+--
+-- Host: localhost    Database: bookstacks
+-- ------------------------------------------------------
+-- Server version	5.6.25-log
 
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+--
+-- Table structure for table `alquiler`
+--
 
 DROP TABLE IF EXISTS `alquiler`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `alquiler` (
   `idalquiler` int(11) NOT NULL AUTO_INCREMENT,
+  `codAlquiler` varchar(45) DEFAULT NULL,
   `fechaEntrega` date DEFAULT NULL,
   `fechaSalida` date DEFAULT NULL,
   `montoPagar` varchar(255) DEFAULT NULL,
@@ -14,10 +35,25 @@ CREATE TABLE `alquiler` (
   PRIMARY KEY (`idalquiler`,`persona_idpersona`),
   KEY `fk_alquiler_persona1_idx` (`persona_idpersona`),
   CONSTRAINT `fk_alquiler_persona1` FOREIGN KEY (`persona_idpersona`) REFERENCES `persona` (`idpersona`)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Dumping data for table `alquiler`
+--
+
+LOCK TABLES `alquiler` WRITE;
+/*!40000 ALTER TABLE `alquiler` DISABLE KEYS */;
+/*!40000 ALTER TABLE `alquiler` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `alquilerdisco`
+--
 
 DROP TABLE IF EXISTS `alquilerdisco`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `alquilerdisco` (
   `idalquilerDisco` int(11) NOT NULL AUTO_INCREMENT,
   `disco_iddisco` int(11) NOT NULL,
@@ -27,9 +63,25 @@ CREATE TABLE `alquilerdisco` (
   KEY `fk_alquilerDisco_alquiler1_idx` (`alquiler_idalquiler`),
   CONSTRAINT `fk_alquilerDisco_alquiler1` FOREIGN KEY (`alquiler_idalquiler`) REFERENCES `alquiler` (`idalquiler`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_alquilerDisco_disco1` FOREIGN KEY (`disco_iddisco`) REFERENCES `disco` (`iddisco`)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `alquilerdisco`
+--
+
+LOCK TABLES `alquilerdisco` WRITE;
+/*!40000 ALTER TABLE `alquilerdisco` DISABLE KEYS */;
+/*!40000 ALTER TABLE `alquilerdisco` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `alquilerlibros`
+--
 
 DROP TABLE IF EXISTS `alquilerlibros`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `alquilerlibros` (
   `idalquilerLibros` int(11) NOT NULL AUTO_INCREMENT,
   `alquiler_idalquiler` int(11) NOT NULL,
@@ -39,9 +91,25 @@ CREATE TABLE `alquilerlibros` (
   KEY `fk_alquilerLibros_libro1_idx` (`libro_idlibro`),
   CONSTRAINT `fk_alquilerLibros_alquiler1` FOREIGN KEY (`alquiler_idalquiler`) REFERENCES `alquiler` (`idalquiler`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_alquilerLibros_libro1` FOREIGN KEY (`libro_idlibro`) REFERENCES `libro` (`idlibro`)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `alquilerlibros`
+--
+
+LOCK TABLES `alquilerlibros` WRITE;
+/*!40000 ALTER TABLE `alquilerlibros` DISABLE KEYS */;
+/*!40000 ALTER TABLE `alquilerlibros` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `alquilerrevista`
+--
 
 DROP TABLE IF EXISTS `alquilerrevista`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `alquilerrevista` (
   `idalquilerRevista` int(11) NOT NULL AUTO_INCREMENT,
   `revista_idrevista` int(11) NOT NULL,
@@ -51,7 +119,21 @@ CREATE TABLE `alquilerrevista` (
   KEY `fk_alquilerRevista_alquiler1_idx` (`alquiler_idalquiler`),
   CONSTRAINT `fk_alquilerRevista_alquiler1` FOREIGN KEY (`alquiler_idalquiler`) REFERENCES `alquiler` (`idalquiler`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_alquilerRevista_revista1` FOREIGN KEY (`revista_idrevista`) REFERENCES `revista` (`idrevista`)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `alquilerrevista`
+--
+
+LOCK TABLES `alquilerrevista` WRITE;
+/*!40000 ALTER TABLE `alquilerrevista` DISABLE KEYS */;
+/*!40000 ALTER TABLE `alquilerrevista` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `autor`
+--
 
 DROP TABLE IF EXISTS `autor`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -62,7 +144,7 @@ CREATE TABLE `autor` (
   `apePatAutor` varchar(45) DEFAULT NULL,
   `apeMatAutor` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idautor`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -71,6 +153,7 @@ CREATE TABLE `autor` (
 
 LOCK TABLES `autor` WRITE;
 /*!40000 ALTER TABLE `autor` DISABLE KEYS */;
+INSERT INTO `autor` VALUES (1,'Joanne','Rowling','Galbraith'),(2,'Stephen','King','Amell'),(3,'Arthur','Conan','Doyle');
 /*!40000 ALTER TABLE `autor` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -114,7 +197,7 @@ CREATE TABLE `genero` (
   `idgenero` int(11) NOT NULL AUTO_INCREMENT,
   `nomGenero` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idgenero`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -123,6 +206,7 @@ CREATE TABLE `genero` (
 
 LOCK TABLES `genero` WRITE;
 /*!40000 ALTER TABLE `genero` DISABLE KEYS */;
+INSERT INTO `genero` VALUES (1,'Historico'),(2,'Comedia'),(3,'Cultural'),(4,'Infantil');
 /*!40000 ALTER TABLE `genero` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -174,7 +258,7 @@ CREATE TABLE `persona` (
   `apellidoMatPersona` varchar(225) DEFAULT NULL,
   `apellidoPatPersona` varchar(225) DEFAULT NULL,
   PRIMARY KEY (`idpersona`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -183,7 +267,7 @@ CREATE TABLE `persona` (
 
 LOCK TABLES `persona` WRITE;
 /*!40000 ALTER TABLE `persona` DISABLE KEYS */;
-INSERT INTO `persona` VALUES (3,'breyes','admin','Bruno','Reyes','Busalleu'),(4,'waguirre','admin','Willy','Aguirre','Rodriguez'),(5,'rtorres','admin','Roberto','Torres','Avales');
+INSERT INTO `persona` VALUES (3,'breyes','admin','Bruno','Reyes','Busalleu'),(4,'waguirre','admin','Willy','Aguirre','Rodriguez'),(5,'rtorres','admin','Roberto','Torres','Avales'),(6,'ralvarez','admin','Roberto','Alvarez','Espinosa');
 /*!40000 ALTER TABLE `persona` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -203,7 +287,7 @@ CREATE TABLE `recomendacion` (
   PRIMARY KEY (`idrecomendacion`,`persona_idpersona`),
   KEY `fk_recomendacion_persona1_idx` (`persona_idpersona`),
   CONSTRAINT `fk_recomendacion_persona1` FOREIGN KEY (`persona_idpersona`) REFERENCES `persona` (`idpersona`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -212,6 +296,7 @@ CREATE TABLE `recomendacion` (
 
 LOCK TABLES `recomendacion` WRITE;
 /*!40000 ALTER TABLE `recomendacion` DISABLE KEYS */;
+INSERT INTO `recomendacion` VALUES (1,'Libro','El Principito','Antoine de Saint-Exupéry',3);
 /*!40000 ALTER TABLE `recomendacion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -254,4 +339,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-07-13 14:16:36
+-- Dump completed on 2015-07-15 15:49:01
