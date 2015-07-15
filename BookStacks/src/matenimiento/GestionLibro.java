@@ -4,6 +4,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import utils.MySQLConexion;
 import beans.Libros;
 import beans.Personas;
@@ -22,7 +24,7 @@ public class GestionLibro {
 		try{
 			con = MySQLConexion.getConexion();
 			
-			String sql = " INSERT INTO libro  VALUES (?,?,?,?,?,?)";
+			String sql = " INSERT INTO libro(codLibro,tituloLibro,numPagLibro,idiomaLibro,autor_idautor,genero_idgenero,precioPorDiaLibro`)VALUES(?,?,?,?,?,?,?);";
 			
 			pst = (PreparedStatement) con.prepareStatement(sql);
 			
@@ -35,7 +37,7 @@ public class GestionLibro {
 			
 			
 			rs =  pst.executeUpdate();
-			
+			JOptionPane.showMessageDialog(null, "Registro de Libro Exitoso");
 			System.out.println("Registro Dictado");
 		
 		}catch (Exception e) {

@@ -5,11 +5,22 @@ import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
+
 import com.toedter.calendar.JDateChooser;
+
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JTable;
+
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
 public class Alquiler extends JInternalFrame {
@@ -17,6 +28,8 @@ public class Alquiler extends JInternalFrame {
 	private JTextField txtNomCli;
 	private JTextField txtCodObj;
 	private JTextField txtMontoPagar;
+	private JComboBox cboObjeto;
+	private JTextArea txtS;
 
 	/**
 	 * Launch the application.
@@ -52,38 +65,44 @@ public class Alquiler extends JInternalFrame {
 		getContentPane().add(label_1);
 		
 		JLabel label_2 = new JLabel("Codigo de Alquiler:");
-		label_2.setBounds(12, 94, 119, 16);
+		label_2.setBounds(12, 216, 119, 16);
 		getContentPane().add(label_2);
 		
 		JLabel label_3 = new JLabel("Fecha de Entrega:");
-		label_3.setBounds(12, 135, 105, 16);
+		label_3.setBounds(12, 97, 105, 16);
 		getContentPane().add(label_3);
 		
 		JLabel label_4 = new JLabel("Nombre del Cliente:");
-		label_4.setBounds(12, 177, 119, 16);
+		label_4.setBounds(12, 139, 119, 16);
 		getContentPane().add(label_4);
 		
 		JLabel label_5 = new JLabel("Codigo del Objeto:");
 		label_5.setBounds(12, 59, 119, 16);
 		getContentPane().add(label_5);
 		
-		JComboBox cboObjeto = new JComboBox();
+		cboObjeto = new JComboBox();
 		cboObjeto.setModel(new DefaultComboBoxModel(new String[] {"Libro", "Revista", "Disco"}));
 		cboObjeto.setBounds(127, 24, 116, 19);
 		getContentPane().add(cboObjeto);
 		
 		txtCodAlq = new JTextField();
+		txtCodAlq.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent arg0) {
+				txtCodAlq.setText(generarCodigo());
+			}
+		});
 		txtCodAlq.setColumns(10);
-		txtCodAlq.setBounds(127, 91, 116, 22);
+		txtCodAlq.setBounds(127, 213, 116, 22);
 		getContentPane().add(txtCodAlq);
 		
 		JDateChooser dtcFechaEntrega = new JDateChooser();
-		dtcFechaEntrega.setBounds(126, 129, 117, 22);
+		dtcFechaEntrega.setBounds(126, 91, 117, 22);
 		getContentPane().add(dtcFechaEntrega);
 		
 		txtNomCli = new JTextField();
 		txtNomCli.setColumns(10);
-		txtNomCli.setBounds(127, 174, 116, 22);
+		txtNomCli.setBounds(127, 136, 116, 22);
 		getContentPane().add(txtNomCli);
 		
 		txtCodObj = new JTextField();
@@ -95,8 +114,7 @@ public class Alquiler extends JInternalFrame {
 		scrollPane.setBounds(268, 13, 214, 366);
 		getContentPane().add(scrollPane);
 		
-		JTextArea txtS = new JTextArea();
-		txtS.setEditable(false);
+		txtS = new JTextArea();
 		scrollPane.setViewportView(txtS);
 		
 		JButton btnGenerar = new JButton("Generar Boleta");
@@ -108,18 +126,50 @@ public class Alquiler extends JInternalFrame {
 		getContentPane().add(btnLimpiar);
 		
 		JButton btnProcesar = new JButton("Procesar");
+		btnProcesar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
 		btnProcesar.setBounds(12, 274, 243, 45);
 		getContentPane().add(btnProcesar);
 		
 		JLabel label_6 = new JLabel("Monto a Pagar:");
-		label_6.setBounds(12, 219, 119, 16);
+		label_6.setBounds(12, 181, 119, 16);
 		getContentPane().add(label_6);
 		
 		txtMontoPagar = new JTextField();
 		txtMontoPagar.setColumns(10);
-		txtMontoPagar.setBounds(127, 216, 116, 22);
+		txtMontoPagar.setBounds(127, 178, 116, 22);
 		getContentPane().add(txtMontoPagar);
+		txtCodAlq.setEditable(false);
 
 	}
 
+	private String generarCodigo() {
+		String nom = new String(txtNomCli.getText());
+		switch (cboObjeto.getSelectedIndex()) {
+		case 0:
+			return "L"+ nom.substring(0,1).toUpperCase() + obtenerFechaCod() ;
+		case 1:
+			return "R"+ nom.substring(0,1).toUpperCase() + obtenerFechaCod() ;
+		default:
+			return "C"+ nom.substring(0,1).toUpperCase() + obtenerFechaCod() ;
+		}
+	}
+
+	private String obtenerFechaCod() {
+		java.util.Date fecha = new java.util.Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("ddMM");
+		Calendar cal = Calendar.getInstance();
+		return sdf.format(fecha);
+	}
+	
+	private String obtenerFecha() {
+		java.util.Date fecha = new java.util.Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		Calendar cal = Calendar.getInstance();
+		return sdf.format(fecha);
+	}
+	
 }

@@ -50,7 +50,7 @@ public class Principal extends JFrame {
 	public Principal() {
 		setTitle("BookStacks");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 676, 553);
+		setBounds(100, 100, 975, 737);
 		
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setBackground(new Color(153, 102, 102));
@@ -222,7 +222,7 @@ public class Principal extends JFrame {
 		getContentPane().setLayout(null);
 		
 		escritorio = new JDesktopPane();
-		escritorio.setBounds(0, 0, 658, 480);
+		escritorio.setBounds(0, 0, 957, 661);
 		getContentPane().add(escritorio);
 	}
 	private void cerrarPricipal() {
